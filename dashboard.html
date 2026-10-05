@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medical Intelligence Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="css/glass.css" />
+    <link rel="stylesheet" href="css/glass-dashboard.css" />
+    <link rel="stylesheet" href="css/dashboard-themes.css" />
+    <link rel="stylesheet" href="css/hospital-dashboard.css" />
+
+    <!-- PWA Settings -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#070b14" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="AI Medical" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+    <link rel="shortcut icon" href="favicon.png" />
+  </head>
+  <body>
+    <div class="dashboard-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          
+          <div>
+            <div class="brand-name"></div>
+            <small style=" font-size: 20px; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: 150px; font-size: x-large; color:darkgreen; margin-right: 795px;">MEDLENS</small>
+          </div>
+        </div>
+
+        <nav class="side-nav">
+          <a href="#" class="active">
+            <span class="nav-icon">⌂</span>
+            Overview
+          </a>
+          <a href="#">
+            <span class="nav-icon">🩺</span>
+            Patients
+          </a>
+          <a href="#">
+            <span class="nav-icon">📄</span>
+            Reports
+          </a>
+          <a href="#" id="navAIAssistant">
+            <span class="nav-icon">🤖</span>
+            AI Assistant
+          </a>
+          <button class="settings-nav-link" id="navSettings" type="button" aria-expanded="false" aria-controls="settingsPanel">
+            <span class="nav-icon">?</span>
+            Settings
+          </button>
+        </nav>
+
+        <div class="settings-panel" id="settingsPanel" hidden>
+          <strong>Dashboard settings</strong>
+          <label class="theme-picker-label" for="themePicker">Theme</label>
+          <select class="theme-picker" id="themePicker" aria-label="Choose dashboard theme">
+            <option value="purple">Purple mode</option>
+            <option value="light">Light mode</option>
+            <option value="green">Green mode</option>
+          </select>
+          <button class="ghost-btn" id="clearAllBtn" type="button">Clear All</button>
+          <button class="ghost-btn" id="logoutBtn" type="button">Log out</button>
+        </div>
+
+        <div class="sidebar-card">
+          <p>Clinical AI</p>
+          <strong>24/7 Ready</strong>
+          <span>Review report insights instantly</span>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+<section class="overview-grid">
+          <article class="glass-card accent">
+            <div class="card-head">
+              <span class="label">Active Patients</span>
+              <span class="trend positive">0%</span>
+            </div>
+            <div class="stat-row">
+              <strong>0</strong>
+              <span>Across 0 departments</span>
+            </div>
+          </article>
+
+          <article class="glass-card">
+            <div class="card-head">
+              <span class="label">Reports Reviewed</span>
+              <span class="trend positive">0%</span>
+            </div>
+            <div class="stat-row">
+              <strong>0</strong>
+              <span>Today with AI support</span>
+            </div>
+          </article>
+
+          <article class="glass-card">
+            <div class="card-head">
+              <span class="label">AI Confidence</span>
+              <span class="trend neutral">0%</span>
+            </div>
+            <div class="stat-row">
+              <strong>0</strong>
+              <span>Clinical summary precision</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- ═══ API Key Warning Banner ═══ -->
+        <div class="api-key-banner" id="apiKeyBanner">
+          <div class="banner-icon">🔑</div>
+          <div class="banner-content">
+            <strong>Groq API Key Required</strong>
+            <p>Open <code>ai-service.js</code> (Line 10) and paste your key, or paste it directly below:</p>
+            <div style="margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              <input type="password" id="bannerApiKeyInput" placeholder="gsk_..." style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 7px 12px; color: #fff; font-size: 0.85rem; width: 260px;" />
+              <button id="bannerSaveKeyBtn" type="button" class="mini-btn" style="padding: 7px 14px; font-size: 0.85rem; background: #38bdf8; color: #020617; font-weight: 700; border-radius: 8px; cursor: pointer; border: none;">Save Key</button>
+              <a href="https://console.groq.com/keys" target="_blank" rel="noopener" style="font-size: 0.85rem; color: #38bdf8; text-decoration: underline;">Get free Groq key ↗</a>
+            </div>
+          </div>
+          <button class="banner-close" id="closeBanner" type="button">✕</button>
+        </div>
+
+        <section class="content-grid">
+          <div class="left-column">
+            <!-- ═══ Upload Panel ═══ -->
+            <article class="panel upload-panel glass">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Clinical workspace</p>
+                  <h2>Upload Medical Report</h2>
+                </div>
+                <button class="action-btn" id="analyzeBtn" disabled>
+                  <span class="btn-icon">✦</span>
+                  Analyze with AI
+                </button>
+              </div>
+
+              <label class="upload-box glass" for="reportInput" id="uploadBox">
+                <input id="reportInput" type="file" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.txt,.webp" />
+                <div class="upload-icon">⇪</div>
+                <h3>Drop report here or browse files</h3>
+                <p>PDF, images, text, and medical documents supported</p>
+              </label>
+
+              <div class="uploaded-file" id="uploadedFile">
+                <!-- File info will appear here -->
+              </div>
+            </article>
+
+            <!-- ═══ Summary Panel ═══ -->
+            <article class="panel summary-panel glass" id="summaryPanel">
+              <div class="panel-header small-gap">
+                <div>
+                  <p class="eyebrow">AI analysis</p>
+                  <h2>Clinical Summary</h2>
+                </div>
+                <div class="summary-actions">
+                  <button class="mini-btn" id="regenerateBtn" style="display:none">
+                    ↻ Regenerate
+                  </button>
+                  <button class="mini-btn outline" id="copySummaryBtn" style="display:none">
+                    📋 Copy
+                  </button>
+                </div>
+              </div>
+
+              <!-- Empty state -->
+              <div class="summary-empty" id="summaryEmpty">
+                <div class="empty-icon">📄</div>
+                <h3>No report analyzed yet</h3>
+                <p>Upload a medical report above and click "Analyze with AI" to generate an intelligent summary.</p>
+              </div>
+
+              <!-- Loading state -->
+              <div class="summary-loading" id="summaryLoading" style="display:none">
+                <div class="ai-spinner">
+                  <div class="spinner-ring"></div>
+                  <div class="spinner-icon">✦</div>
+                </div>
+                <h3>Analyzing report...</h3>
+                <p class="loading-sub" id="loadingText">AI is reading and understanding your medical report</p>
+                <div class="loading-bar">
+                  <div class="loading-bar-fill" id="loadingBarFill"></div>
+                </div>
+              </div>
+
+              <!-- Summary content -->
+              <div class="summary-content" id="summaryBox" style="display:none"></div>
+
+              <!-- Error state -->
+              <div class="summary-error" id="summaryError" style="display:none">
+                <div class="error-icon">⚠️</div>
+                <h3>Analysis Failed</h3>
+                <p id="errorMessage">Something went wrong. Please try again.</p>
+                <button class="mini-btn" id="retryBtn">Try Again</button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ═══ Chat Launcher ═══ -->
+    <button class="chat-launcher" id="chatLauncher" type="button">
+      <span class="launcher-icon">✦</span>
+      <span>Ask about report</span>
+      <span class="chat-badge" id="chatBadge" style="display:none">●</span>
+    </button>
+
+    <!-- ═══ Chat Drawer ═══ -->
+    <aside class="chat-drawer" id="chatDrawer" aria-live="polite">
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow">AI assistant</p>
+          <h3>Medical Chatbot</h3>
+        </div>
+        <div class="drawer-header-actions">
+          <button class="icon-btn" id="clearChatBtn" type="button" title="Clear chat">🗑️</button>
+          <button class="close-chat" id="closeChat" type="button" aria-label="Close chat">✕</button>
+        </div>
+      </div>
+
+      <div class="chat-status" id="chatStatus">
+        <span class="status-dot"></span>
+        <span id="chatStatusText">No report loaded</span>
+      </div>
+
+      <div class="chat-box" id="chatBox">
+        <div class="message bot">
+          <div class="message-avatar">✦</div>
+          <div class="message-content">
+            <p>Hello! I'm your medical AI assistant. Upload a report and I can answer questions about it — lab values, diagnoses, medications, follow-up recommendations, and more.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick action chips -->
+      <div class="chat-chips" id="chatChips">
+        <button class="chip" data-msg="What are the key findings?">Key findings</button>
+        <button class="chip" data-msg="Are there any abnormal values?">Abnormal values</button>
+        <button class="chip" data-msg="What follow-up is recommended?">Follow-up</button>
+        <button class="chip" data-msg="Explain in simple terms">Simplify</button>
+      </div>
+
+      <form class="chat-form" id="chatForm">
+        <input id="chatInput" type="text" placeholder="Ask anything about the report..." autocomplete="off" />
+        <button type="submit" id="chatSendBtn">
+          <span>Send</span>
+        </button>
+      </form>
+    </aside>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="firebase.js"></script>
+    <script src="ai-service.js?v=2.1"></script>
+    <script src="dashboard.js?v=2.1"></script>
+    <script src="js/dashboard-theme.js" defer></script>
+    <script src="pwa.js?v=2.1"></script>
+    <script src="js/glass-hover.js" defer></script>
+    <script src="js/glass-fx.js" defer></script>
+  </body>
+</html>

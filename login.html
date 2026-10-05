@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | MedLens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="auth.css" />
+    <link rel="stylesheet" href="css/glass.css" />
+    <link rel="stylesheet" href="css/glass-landing.css" />
+    <link rel="stylesheet" href="css/hospital-landing.css" />
+
+    <!-- PWA Settings -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#070b14" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="AI Medical" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+    <link rel="shortcut icon" href="favicon.png" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <div class="auth-shell">
+        <section class="auth-visual">
+          <div class="brand-wrap">
+            <div class="brand-mark">
+            <img src="icons/medlens-medical-report.png" alt="" aria-hidden="true" style="display:block;width:100%;height:100%;object-fit:contain" />
+          </div>
+            <div class="brand-text">MEDLENS</div>
+          </div>
+
+          <h1>Welcome back to smarter patient care.</h1>
+          <p>
+            Access patient records, AI summaries, and clinical insights from one secure healthcare dashboard.
+          </p>
+
+          <ul class="auth-points">
+            <li>Private patient report storage</li>
+            <li>AI-generated clinical summaries</li>
+            <li>Faster team collaboration</li>
+          </ul>
+        </section>
+
+        <section class="auth-form-wrap">
+          <form class="auth-form">
+            <div class="auth-top">
+              <h2>Login</h2>
+              <a class="auth-link" href="signup.html">Create account</a>
+            </div>
+
+            <div class="form-grid">
+              <div class="input-group">
+                <label for="email">Email address</label>
+                <input id="email" type="email" placeholder="you@example.com" />
+              </div>
+
+              <div class="input-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="Enter your password" />
+              </div>
+
+              <div class="form-options">
+                <label class="check-wrap">
+                  <input type="checkbox" />
+                  <span>Remember me</span>
+                </label>
+                <a href="#" class="auth-link">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="btn btn-primary auth-btn">Login</button>
+            </div>
+
+            <div class="auth-divider"><span>or continue with</span></div>
+
+            <div class="social-btns">
+              <button type="button">Google</button>
+              <button type="button">Microsoft</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="firebase.js"></script>
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="pwa.js"></script>
+    <script src="js/glass-hover.js" defer></script>
+    <script src="js/glass-fx.js" defer></script>
+  </body>
+</html>
